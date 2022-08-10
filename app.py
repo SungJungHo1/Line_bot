@@ -20,6 +20,7 @@ import os
 import sys
 import tempfile
 from argparse import ArgumentParser
+import ssl
 
 from flask import Flask, request, abort, send_from_directory
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -109,7 +110,8 @@ def handle_text_message(event):
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(text='Display name: ' + profile.display_name),
-                    TextSendMessage(text='Status message: ' + str(profile.status_message))
+                    TextSendMessage(text='Status message: ' + str(profile.status_message)),
+                    TextSendMessage(text='userId: ' + str(event.source.user_id))
                 ]
             )
         else:
@@ -697,5 +699,6 @@ if __name__ == "__main__":
 
     # create tmp dir for download content
     make_static_tmp_dir()
-
-    app.run(debug=options.debug, port=options.port)
+    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    ssl_context.load_cert_chain(certfile='certificate.pem', keyfile='private.key')
+    app.run(host="0.0.0.0", debug=options.debug, port=options.port, ssl_context=ssl_context)
