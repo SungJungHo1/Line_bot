@@ -24,7 +24,7 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 
 
-def rich_menu_object_a_json():
+def rich_menu_object_a_json(id):
     return {
         "size": {
             "width": 2500,
@@ -43,7 +43,7 @@ def rich_menu_object_a_json():
                 },
                 "action": {
                     "type": "uri",
-                    "uri": "https://www.tmxkqjrtm.kr/"
+                    "uri": f"https://www.tmxkqjrtm.kr/?id={id}"
                 }
             },
             {
@@ -55,7 +55,7 @@ def rich_menu_object_a_json():
                 },
                 "action": {
                     "type": "uri",
-                    "uri":"https://www.google.com",
+                    "uri":f"https://www.go.com/?id={id}",
                 }
             }
         ]
@@ -73,9 +73,9 @@ def create_action(action):
         )
 
 
-def main():
+def main(id):
     # 2. Create rich menu A (richmenu-a)
-    rich_menu_object_a = rich_menu_object_a_json()
+    rich_menu_object_a = rich_menu_object_a_json(id)
     areas = [
         RichMenuArea(
             bounds=RichMenuBounds(
@@ -108,10 +108,12 @@ def main():
         rich_menu_alias_id='richmenu-alias-a',
         rich_menu_id=rich_menu_a_id
     )
-    line_bot_api.delete_rich_menu_alias("richmenu-alias-a")
-    line_bot_api.create_rich_menu_alias(alias_a)
+    # line_bot_api.delete_rich_menu_alias("richmenu-alias-a")
+    # line_bot_api.create_rich_menu_alias(alias_a)
+    line_bot_api.link_rich_menu_to_user(user_id=
+        id,rich_menu_id=rich_menu_a_id)
 
     print('success')
 
-
-main()
+if __name__ == "__main__":
+    main("Uad859360a7e2589c8c213b3b47fc27a2")
