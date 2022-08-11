@@ -100,10 +100,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     text = event.message.text
-    
+    userId_data = event.source.user_id
     if text == 'profile':
         if isinstance(event.source, SourceUser):
-            userId_data = event.source.user_id
             profile = line_bot_api.get_profile(userId_data)
             line_bot_api.reply_message(
                 event.reply_token, [
