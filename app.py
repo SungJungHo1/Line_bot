@@ -104,13 +104,12 @@ def handle_text_message(event):
     if text == 'profile':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(userId_data)
-            line_bot_api.reply_message(
-                event.reply_token, [
-                    TextSendMessage(text='Display name: ' + profile.display_name),
-                    TextSendMessage(text='Status message: ' + str(profile.status_message)),
-                    TextSendMessage(text='userId: ' + str(userId_data))
-                ]
-            )
+            # line_bot_api.reply_message(
+            #     event.reply_token, [
+            #         TextSendMessage(text='Display name: ' + profile.display_name),
+            #         TextSendMessage(text='Status message: ' + str(profile.status_message)),
+            #     ]
+            # )
         else:
             line_bot_api.reply_message(
                 event.reply_token,
@@ -197,6 +196,7 @@ def handle_follow(event):
     app.logger.info("Got Follow event:" + event.source.user_id)
     line_bot_api.reply_message(
         event.reply_token, TextSendMessage(text='Got follow event'))
+    main(event.source.user_id)
 
 
 @handler.add(UnfollowEvent)
@@ -246,7 +246,7 @@ def handle_member_joined(event):
         TextSendMessage(
             text='Got memberJoined event. event={}'.format(
                 event)))
-
+    main(event.source.user_id)
 
 @handler.add(MemberLeftEvent)
 def handle_member_left(event):

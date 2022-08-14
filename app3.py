@@ -43,7 +43,7 @@ def rich_menu_object_a_json(id):
                 },
                 "action": {
                     "type": "uri",
-                    "uri": f"https://www.tmxkqjrtm.kr/?id={id}"
+                    "uri": f"https://www.tmxkqjrtm.kr/?userId={id}"
                 }
             },
             {
@@ -100,7 +100,7 @@ def main(id):
     rich_menu_a_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_a_create)
 
     # 3. Upload image to rich menu A
-    with open('./public/richmenu-a.png', 'rb') as f:
+    with open('./public/richmenu-a.jpg', 'rb') as f:
         line_bot_api.set_rich_menu_image(rich_menu_a_id, 'image/png', f)
 
     # 7. Create rich menu alias A
@@ -112,6 +112,7 @@ def main(id):
     # line_bot_api.create_rich_menu_alias(alias_a)
     line_bot_api.link_rich_menu_to_user(user_id=
         id,rich_menu_id=rich_menu_a_id)
+    line_bot_api.set_default_rich_menu(rich_menu_a_id)
 
     print('success')
 
