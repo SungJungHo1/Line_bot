@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import os
 import sys
+from data import *
 
 from linebot import (
     LineBotApi,
@@ -16,7 +16,6 @@ from linebot.models import (
 from linebot.models.actions import RichMenuSwitchAction
 from linebot.models.rich_menu import RichMenuAlias
 
-channel_access_token = "LPoD2xZWE8Yz/OiZvghUhnuVRWqijmXiziipqaGKLbr30u9nEYmn3gcXM+U41brU6fKNWFMEcEyAQi/KiDaHHLHB/CJBbRphNIJLAYgmNJ6R18csA3uCr/IlGOGNZZIOsHmjTgH2gF4wSSI5/NRROQdB04t89/1O/w1cDnyilFU="
 if channel_access_token is None:
     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
@@ -31,7 +30,7 @@ def rich_menu_object_a_json(id):
             "height": 1686
         },
         "selected": True,
-        "name": "taiFood",
+        "name": "FASTFOOD",
         "chatBarText": "Tap to open",
         "areas": [
             {
