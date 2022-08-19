@@ -54,7 +54,7 @@ def rich_menu_object_a_json(id):
                 },
                 "action": {
                     "type": "uri",
-                    "uri":f"https://www.go.com/?id={id}",
+                    "uri":f"https://lin.ee/k5N1iWt",
                 }
             }
         ]
