@@ -104,12 +104,12 @@ def handle_text_message(event):
     if text == 'profile':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(userId_data)
-            # line_bot_api.reply_message(
-            #     event.reply_token, [
-            #         TextSendMessage(text='Display name: ' + profile.display_name),
-            #         TextSendMessage(text='Status message: ' + str(profile.status_message)),
-            #     ]
-            # )
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(text='Display name: ' + event.source.user_id),
+                    TextSendMessage(text='Status message: ' + str(profile.status_message)),
+                ]
+            )
         else:
             line_bot_api.reply_message(
                 event.reply_token,
@@ -194,8 +194,7 @@ def handle_file_message(event):
 @handler.add(FollowEvent)
 def handle_follow(event):
     app.logger.info("Got Follow event:" + event.source.user_id)
-    line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text='Got follow event'))
+    
     main(event.source.user_id)
 
 
@@ -206,9 +205,7 @@ def handle_unfollow(event):
 
 @handler.add(JoinEvent)
 def handle_join(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=f'Joined this {event.source.type}!'))
+    
     main(event.source.user_id)
     ############################################################# Join
 
