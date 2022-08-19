@@ -30,7 +30,7 @@ def rich_menu_object_a_json(id):
             "height": 1686
         },
         "selected": True,
-        "name": "FASTFOOD",
+        "name": "สั่งอาหาร",
         "chatBarText": "Tap to open",
         "areas": [
             {
